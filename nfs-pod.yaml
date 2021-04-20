@@ -7,7 +7,6 @@ metadata:
   labels:
     run: nginx
   name: nginx-nfs
-  namespace: default
 spec:
   replicas: 1
   selector:
