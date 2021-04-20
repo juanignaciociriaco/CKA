@@ -1,0 +1,49 @@
+Checking Access
+While there is more detail on security in a later chapter, it is helpful to check the current authorizations, both as an administrator, as well as another user. The following shows what user bob could do in the default namespace and the developer namespace, using the auth can-i subcommand to query: 
+
+$ kubectl auth can-i create deployments
+yes 
+
+$ kubectl auth can-i create deployments --as bob
+no 
+
+$ kubectl auth can-i create deployments --as bob --namespace developer
+yes 
+
+There are currently three APIs which can be applied to set who and what can be queried:
+
+SelfSubjectAccessReview​
+Access review for any user, helpful for delegating to others. 
+
+LocalSubjectAccessReview
+​Review is restricted to a specific namespace.
+
+SelfSubjectRulesReview​
+A review which shows allowed actions for a user within a particular namespace. 
+
+
+The use of reconcile allows a check of authorization necessary to create an object from a file. No output indicates the creation would be allowed.
+
+
+
+
+
+---
+
+Using Annotations
+Labels are used to work with objects or collections of objects; annotations are not.
+
+Instead, annotations allow for metadata to be included with an object that may be helpful outside of the Kubernetes object interaction. Similar to labels, they are key to value maps. They are also able to hold more information, and more human-readable information than labels. 
+
+Having this kind of metadata can be used to track information such as a timestamp, pointers to related objects from other ecosystems, or even an email from the developer responsible for that object's creation. 
+
+The annotation data could otherwise be held in an exterior database, but that would limit the flexibility of the data. The more this metadata is included, the easier it is to integrate management and deployment tools or shared client libraries. 
+
+For example, to annotate only Pods within a namespace, you can overwrite the annotation, and finally delete it: 
+
+$ kubectl annotate pods --all description='Production Pods' -n prod 
+
+$ kubectl annotate --overwrite pod webpod description="Old Production Pods" -n prod 
+
+$ kubectl -n prod annotate pod webpod description-
+

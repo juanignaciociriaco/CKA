@@ -1,0 +1,1 @@
+kubeadm join 10.233.1.10:6443 --token fnz453.4rwvc35gjgngcesp --discovery-token-ca-cert-hash sha256:7bb0a490d13b23ff97a211e79d72897151fd207879a606a4682077a612c87605

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ds-one
+spec:
+  # modify replicas according to your case
+  selector:
+    matchLabels:
+      tier: ReplicaOne
+  template:
+    metadata:
+      labels:
+        tier: ReplicaOne
+        system: DaemonSetOne
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.15.1
+        ports:
+        - containerPort: 80

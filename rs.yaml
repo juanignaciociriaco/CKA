@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-one
+spec:
+  # modify replicas according to your case
+  replicas: 2
+  selector:
+    matchLabels:
+      tier: ReplicaOne
+  template:
+    metadata:
+      labels:
+        tier: ReplicaOne
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.15.1
+        ports: 80
