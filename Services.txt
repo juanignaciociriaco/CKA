@@ -1,0 +1,31 @@
+Service Types
+
+ClusterIP
+The ClusterIP service type is the default, and only provides access internally (except if manually creating an external endpoint). The range of ClusterIP used is defined via an API server startup option.
+
+
+NodePort
+
+The NodePort type is great for debugging, or when a static IP address is necessary, such as opening a particular address through a firewall. The NodePort range is defined in the cluster configuration.
+
+LoadBalancer
+The LoadBalancer service was created to pass requests to a cloud provider like GKE or AWS. Private cloud solutions also may implement this service type if there is a cloud provider plugin, 
+such as with CloudStack and OpenStack. Even without a cloud provider, the address is made available to public traffic, and packets are spread among the Pods in the deployment automatically.
+
+
+ExternalName
+
+A newer service is ExternalName, which is a bit different. It has no selectors, nor does it define ports or endpoints. It allows the return of an alias to an external service. 
+The redirection happens at the DNS level, not via a proxy or forward. This object can be useful for services not yet brought into the Kubernetes cluster. A simple change of the type 
+in the future would redirect traffic to the internal objects.
+
+
+
+Local Proxy For Development
+
+
+kubectl proxy
+
+Next, to access a ghost service using the local proxy, we could use the following URL, for example, 
+at http://localhost:8001/api/v1/namespaces/default/services/ghost.
+
