@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       system: secondary
-    replicas: 2
+  replicas: 2
   template:
     metadata:
       labels:
