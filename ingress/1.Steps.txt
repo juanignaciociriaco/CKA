@@ -1,0 +1,15 @@
+k apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/baremetal/deploy.yaml
+kubectl run ghost --image=ghost
+kubectl expose deployments ghost --port=2368
+
+# Service Mesh
+
+Service Mesh Options
+Close Envoy
+Envoy is a modular and extensible proxy favored due to its modular construction, open architecture and dedication to remaining unmonetized. It is often used as a data plane under other tools of a service mesh.
+
+Close Istio
+Istio is a powerful tool set which leverages Envoy proxies via a multi-component control plane. It is built to be platform-independent, and it can be used to make the service mesh flexible and feature-filled.
+
+Close linkerd
+linkerd is another service mesh, purposely built to be easy to deploy, fast, and ultralight.
