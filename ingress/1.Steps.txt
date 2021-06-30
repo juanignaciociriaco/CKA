@@ -2,6 +2,11 @@ k apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/dep
 kubectl run ghost --image=ghost
 kubectl expose deployments ghost --port=2368
 
+
+# #
+
+kubectl create deployment secondapp --image=nginx
+
 # Service Mesh
 
 Service Mesh Options

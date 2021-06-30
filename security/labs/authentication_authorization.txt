@@ -1,0 +1,31 @@
+kubectl create ns development
+
+kubectl create ns production
+
+
+kubectl config get-contexts
+
+sudo useradd -s /bin/bash DevDan
+
+passwd DevDan
+
+openssl genrsa -out DevDan.key 2048
+
+touch $HOME/.rnd
+
+openssl req -new -key DevDan.key \-out DevDan.csr -subj "/CN=DevDan/O=development"
+
+openssl x509 -req -in DevDan.csr -CA /etc/kubernetes/pki/ca.crt -CAkey /etc/kubernetes/pki/ca.key -CAcreateserial -out DevDan.crt -days 45
+
+kubectl config set-credentials DevDan --client-certificate=/root/DevDan.crt --client-key=/root/DevDan.key
+
+diff cluster-api-config .kube/config
+
+kubectl config set-context DevDan-context \--cluster=kubernetes \--namespace=development \--user=DevDan
+
+kubectl --context=DevDan-context get pods
+
+kubectl config get-contexts
+
+
+diff cluster-api-config .kube/config

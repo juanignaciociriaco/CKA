@@ -1,0 +1,29 @@
+Exercise 13.1: Review Log File LocationsOverviewIn addition to various logs files and command output, you can usejournalctlto view logs from the node perspective.
+We will view common locations of log files, then a command to view container logs.  
+There are other logging options,such as the use of asidecarcontainer dedicated to loading the logs of another container in a pod.Whole cluster 
+logging is not yet available with Kubernetes. 
+Outside software is typically used, such asFluentd, part ofhttp://fluentd.org/, which is another member project of CNCF.io, like Kubernetes.
+Take a quick look at the following log files and web sites. As server processes move from node level to running in containersthe logging also moves.1
+.  If using asystemd.based Kubernetes cluster, view the node level logs forkubelet, the local Kubernetes agent.  
+Eachnode will have different contents as this is node specific.
+student@cp: ̃$ journalctl -u kubelet |less1<output_omitted>2.  
+Major Kubernetes processes now run in containers. You can view them from the container or the pod perspective. 
+Usethefindcommand to locate thekube-apiserverlog. Your output will be different, but will be very long.
+student@cp: ̃$ sudo find / -name "*apiserver*log"
+1/var/log/containers/kube-apiserver-cp_kube-system_kube-apiserver-4232d25701998f68b503e64d41dd786e657fc09504f13278044934d79a4019e3c.log3.
+  Take a look at the log file.
+  student@cp: ̃$ sudo less /var/log/containers/kube-apiserver-cp_kube-system_kube-apiserver-423d25701998f68b503e64d41dd786e657fc09504f13278044934d79a4019e3c.log
+  <output_omitted>
+  4.  Search for and review other log files forcoredns,kube-proxy, and other cluster agents.
+  5.  Ifnoton a Kubernetes cluster usingsystemdwhich collects logs viajournalctlyou can view the text files on the cpnode.
+  (a)/var/log/kube-apiserver.logResponsible for serving the API
+  (b)/var/log/kube-scheduler.logResponsible for making scheduling decisions
+  (c)/var/log/kube-controller-manager.logController that manages replication controllers
+  6./var/log/containersVarious container logs
+  7./var/log/pods/More log files for current Pods.
+
+  8.  Worker Nodes Files (on non-systemdsystems)
+  (a)/var/log/kubelet.logResponsible for running containers on the node
+  (b)/var/log/kube-proxy.logResponsible for service load balancing
+  
+  9.  More  reading:https://kubernetes.io/docs/tasks/debug-application-cluster/debug-service/  and  https://kubernetes.io/docs/tasks/debug-application-cluster/determine-reason-pod-failure/V2021-06-18© Copyright the Linux Foundation 2021. All rights reserved.

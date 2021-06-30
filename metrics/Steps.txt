@@ -1,0 +1,15 @@
+
+1
+git clone https://github.com/kubernetes-incubator/metrics-server.git
+2
+kubectl create -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.7/components.yaml
+
+3
+Edit the Deployment and add this:
+spec:3containers:4- args:5- --cert-dir=/tmp6- --secure-port=44437- --kubelet-insecure-tls                    #<-- Add this line8- --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname #<--May be needed
+
+4 Install Dashboard
+kubectl create -f https://bit.ly/2OFQRMy
+
+
+

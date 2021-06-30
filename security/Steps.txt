@@ -1,0 +1,8 @@
+To perform any action in a Kubernetes cluster, you need to access the API and go through three main steps:
+
+Authentication:
+Authorization (ABAC or RBAC):
+Admission Control.
+These steps are described in more detail in the official documentation about controlling access to the Kubernetes API 
+and illustrated by the diagram below.
+

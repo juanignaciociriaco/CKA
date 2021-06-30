@@ -1,0 +1,21 @@
+ABAC stands for Attribute Based Access Control. It was the first authorization model in Kubernetes that allowed 
+administrators to implement the right policies. Today, RBAC is becoming the default authorization mode.
+
+Policies are defined in a JSON file and referenced to by a kube-apiserver startup option:
+
+--authorization-policy-file=my_policy.json
+
+For example, the policy file shown below authorizes user Bob to read pods in the namespace foobar:
+
+{
+    "apiVersion": "abac.authorization.kubernetes.io/v1beta1",
+    "kind": "Policy",
+    "spec": {
+        "user": "bob",
+        "namespace": "foobar",
+        "resource": "pods",
+        "readonly": true     
+    }
+}
+
+You can check other policy examples in the Kubernetes Documentation.

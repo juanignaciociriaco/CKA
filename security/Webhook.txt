@@ -1,0 +1,5 @@
+Webhook
+A Webhook is an HTTP callback, an HTTP POST that occurs when something happens; a simple event-notification via HTTP POST. A web application implementing Webhooks will POST a message to a URL when certain things happen.
+
+To learn more about using the Webhook mode, see the Webhook Mode section of the Kubernetes Documentation.
+https://kubernetes.io/docs/reference/access-authn-authz/webhook/
