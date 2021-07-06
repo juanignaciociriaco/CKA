@@ -1,0 +1,11 @@
+# Article
+https://platform9.com/blog/building-a-complete-stack-ingress-controllers/
+# Install resources
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/cloud/deploy.yaml
+
+# Adding LoadBalancer (cloud)
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/cloud/deploy.yaml
+
+# Adding with LoadBalancer (baremetal) -NodePort # THIS ONE
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.44.0/deploy/static/provider/baremetal/deploy.yaml
