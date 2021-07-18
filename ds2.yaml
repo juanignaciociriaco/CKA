@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    deprecated.daemonset.template.generation: "3"
+  creationTimestamp: "2021-07-18T00:35:53Z"
+  generation: 4
+  name: ds-two
+  namespace: default
+  resourceVersion: "11280746"
+  uid: 0f7a6a4f-9faf-4622-b25a-6a88fea8b256
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      tier: ReplicaOne
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        system: DaemonSetOne
+        tier: ReplicaOne
+    spec:
+      containers:
+      - image: nginx:1.15.1
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+status:
+  currentNumberScheduled: 3
+  desiredNumberScheduled: 3
+  numberAvailable: 3
+  numberMisscheduled: 0
+  numberReady: 3
+  observedGeneration: 4
+  updatedNumberScheduled: 3
