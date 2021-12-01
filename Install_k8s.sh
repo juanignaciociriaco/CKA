@@ -21,7 +21,8 @@ echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.
 echo "Instalar kubernetes"
 apt-get update && apt-get install -y docker.io kubelet kubeadm kubectl kubernetes-cni
 echo "Quitar la swap"
-swapoff -a
+sudo swapoff -a
+sudo sed -i '/ swap / s/^/#/' /etc/fstab
 echo "Reiniciar el servicio "
 systemctl daemon-reload && systemctl restart kubelet
 echo "habilitar docker"
